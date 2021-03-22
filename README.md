@@ -1,7 +1,7 @@
 # Building a Recommender
-**1.Sign up for an AWS account**
-**2. Configure the elastic-mapreduce ruby client.**
-**3. Start up an EMR cluster (note the pricing and make sure to shut the cluster down afterward).**
+l. **1.Sign up for an AWS account**
+l. **2. Configure the elastic-mapreduce ruby client.**
+l. **3. Start up an EMR cluster (note the pricing and make sure to shut the cluster down afterward).**
 
 # 4. Get the MovieLens data
 
