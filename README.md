@@ -127,7 +127,9 @@ run("localhost", 8080)
 </pre> </li> 
         <li>Start the web service.<br> <code>twistd -noy hello.py &amp;</code> </li> 
         <li>Test the web service with user id “37”:<br> <code>curl localhost:8080/37</code> </li> 
-        <li>You should see a response like this (again, your recommendations will differ):<br> The recommendations for user 37 are [7:5.0,2088:5.0,2080:5.0,1043:5.0,3107:5.0,2087:5.0,2078:5.0,3108:5.0,1042:5.0,1028:5.0]</li> 
+        <li>You should see a response like this (again, your recommendations will differ):<br> The recommendations for user 37 are 
+       [7:5.0,2088:5.0,2080:5.0,1043:5.0,3107:5.0,2087:5.0,2078:5.0,3108:5.0,1042:5.0,1028:5.0] **
+</li> 
         <li>When you’re finished, don’t forget to shut down the cluster:<br> <code>./elastic-mapreduce --list</code><p></p> <pre>j-UNIQUEJOBID      WAITING        ec2-AA-BB-CC-DD.compute-1.amazonaws.com         mahout-tutorial</pre> <p><code>./elastic-mapreduce --terminate j-UNIQUEJOBID</code> </p></li> 
         <li>Confirm shutdown:<br> <code>./elastic-mapreduce --list</code><p></p> <pre>j-UNIQUEJOBID     SHUTTING_DOWN     ec2-AA-BB-CC-DD.compute-1.amazonaws.com         mahout-tutorial</pre> <p>After a few minutes:<br> <code>./elastic-mapreduce --list</code></p> <pre>j-UNIQUEJOBID     TERMINATED     ec2-AA-BB-CC-DD.compute-1.amazonaws.com         mahout-tutorial</pre> </li> 
        </ol>
