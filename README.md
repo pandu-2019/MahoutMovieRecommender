@@ -1,41 +1,28 @@
 # Building a Recommender
-After setting up the EMR Cluster,
-
-<h2>Get the MovieLens data</h2>
-
-<p><code>wget http://files.grouplens.org/datasets/movielens/ml-1m.zip</code></p>
-<p><code>unzip ml-1m.zip</code></p>
-
-** Convert ratings.dat, trade “::” for “,”, and take only the first three columns:**
-<p><code>cat ml-1m/ratings.dat | sed 's/::/,/g' | cut -f1-3 -d, > ratings.csv</code></p>
-
-**Put ratings file into HDFS:**
-<p><code>hadoop fs -put ratings.csv /ratings.csv</code></p>
-
-# Building a Recommender
 To demonstrate how to build an analytic job with Mahout on EMR, we’ll build a movie recommender. We will start with ratings given to movie titles by users in the MovieLens data set, which was compiled by the GroupLens team, and will use the “recommenditembased” example to find most-recommended movies for each user.
 
 1. Sign up for an AWS account.
 2. Configure the elastic-mapreduce ruby client.
 3. Start up an EMR cluster (note the pricing and make sure to shut the cluster down afterward).
-./elastic-mapreduce --create --alive --name mahout-tutorial --num-instances 4 --master-instance-type m1.xlarge --slave-instance-type m2.2xlarge --ami-version 3.1 --ssh
+4. <p><code>./elastic-mapreduce --create --alive --name mahout-tutorial --num-instances 4 --master-instance-type m1.xlarge --slave-instance-type m2.2xlarge --ami-version 3.1 --ssh</code></p>
+
 
 4. Get the MovieLens data
-<p><code>wget http://files.grouplens.org/datasets/movielens/ml-1m.zip</code></p>
-<p><code>unzip ml-1m.zip</code></p>
+        <p><code>wget http://files.grouplens.org/datasets/movielens/ml-1m.zip</code></p>
+        <p><code>unzip ml-1m.zip</code></p>
 
 Convert ratings.dat, trade “::” for “,”, and take only the first three columns:
-<p><code>cat ml-1m/ratings.dat | sed 's/::/,/g' | cut -f1-3 -d, > ratings.csv</code></p>
+        <p><code>cat ml-1m/ratings.dat | sed 's/::/,/g' | cut -f1-3 -d, > ratings.csv</code></p>
 
 Put ratings file into HDFS:
-<p><code>hadoop fs -put ratings.csv /ratings.csv</code></p>
+        <p><code>hadoop fs -put ratings.csv /ratings.csv</code></p>
 
 5. Run the recommender job:
-<p><code>mahout recommenditembased --input /ratings.csv --output recommendations --numRecommendations 10 --outputPathForSimilarityMatrix similarity-matrix --similarityClassname SIMILARITY_COSINE</code></p>
+        <p><code>mahout recommenditembased --input /ratings.csv --output recommendations --numRecommendations 10 --outputPathForSimilarityMatrix similarity-matrix --similarityClassname SIMILARITY_COSINE</code></p>
 
 6. Look for the results in the part-files containing the recommendations:
-<p><code>hadoop fs -ls recommendations</code></p>
-<p><code>hadoop fs -cat recommendations/part-r-00000 | head</code></p>
+        <p><code>hadoop fs -ls recommendations</code></p>
+        <p><code>hadoop fs -cat recommendations/part-r-00000 | head</code></p>
         
         
 You should see a lookup file that looks something like this (your recommendations will be different since they are all 5.0-valued and we are only picking ten):
